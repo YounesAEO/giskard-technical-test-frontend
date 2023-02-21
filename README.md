@@ -13,6 +13,9 @@
 
 -   [ ] create UI to specify availabilities
     -   UI inspired from Cal.com
+    -   [x] add toggle component
+    -   [x] add time-picker component
+    -   [ ] integrate components to the global availabilities UI
 -   [ ] connect to backend API
 -   [ ] create UI to update availabilities
 -   [ ] connect to backend API

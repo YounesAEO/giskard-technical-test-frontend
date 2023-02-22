@@ -21,20 +21,6 @@ export interface IAvailability {
 	days: number[];
 }
 
-// test with dummy data
-const dummyData: IAvailability[] = [
-	{
-		start: { hours: 9, minutes: 0 },
-		end: { hours: 12, minutes: 0 },
-		days: [1, 2, 3],
-	},
-	{
-		start: { hours: 13, minutes: 0 },
-		end: { hours: 17, minutes: 0 },
-		days: [4, 5, 6, 7],
-	},
-];
-
 export default function ReservationTemplate() {
 	const [state, setState] = useState<IReservationTemplateState>({
 		availableDates: [],
@@ -144,9 +130,6 @@ export default function ReservationTemplate() {
 					<div className="flex items-center justify-center w-full p-2 text-gray-700">
 						<Calendar
 							className="_react-calendar"
-							// onChange={(value: Date, e: any) => {
-							// 	setSelectedDate(value);
-							// }}
 							onClickDay={(value, e) => {
 								setSelectedDate(value);
 							}}

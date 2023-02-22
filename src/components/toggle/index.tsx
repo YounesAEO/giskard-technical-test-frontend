@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
 
-export function Toggle() {
+export function Toggle({ onToggle = (enabled: boolean) => {} }) {
 	const [enabled, setEnabled] = useState(false);
 
 	return (
 		<Switch
 			checked={enabled}
-			onChange={setEnabled}
+			onChange={(e: boolean) => {
+				setEnabled(e);
+				onToggle(e);
+			}}
 			className={`${
 				enabled ? 'bg-blue-600' : 'bg-gray-200'
 			} relative inline-flex h-6 w-11 items-center rounded-full`}>

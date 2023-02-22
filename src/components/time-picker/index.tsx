@@ -1,25 +1,31 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 
-const DEFAULT_START_DATE = new Date();
-DEFAULT_START_DATE.setHours(9);
-DEFAULT_START_DATE.setMinutes(0);
-
-const DEFAULT_END_DATE = new Date();
-DEFAULT_END_DATE.setHours(17);
-DEFAULT_END_DATE.setMinutes(0);
-
-export const TimePicker = () => {
-	const [startDate, setStartDate] = useState(DEFAULT_START_DATE);
-	const [endDate, setEndDate] = useState(DEFAULT_END_DATE);
+export const TimePicker = ({
+	onStartTimeChange = (time: any) => {},
+	onEndTimeChange = (time: any) => {},
+}) => {
+	const [startDate, setStartDate] = useState({ hours: 9, minutes: 0 });
+	const [endDate, setEndDate] = useState({ hours: 17, minutes: 0 });
 
 	return (
 		<div className="flex gap-1 items-center">
 			<div>
 				<DatePicker
 					className="w-3/4 border-2 rounded-md p-2 border-gray-500 hover:border-gray-800 "
-					selected={startDate}
-					onChange={(date: Date) => setStartDate(date)}
+					selected={
+						new Date(0, 0, 0, startDate.hours, startDate.minutes)
+					}
+					onChange={(date: Date) => {
+						setStartDate({
+							hours: date.getHours(),
+							minutes: date.getMinutes(),
+						});
+						onStartTimeChange({
+							hours: date.getHours(),
+							minutes: date.getMinutes(),
+						});
+					}}
 					showTimeSelect
 					showTimeSelectOnly
 					timeIntervals={15}
@@ -32,13 +38,29 @@ export const TimePicker = () => {
 			<div>
 				<DatePicker
 					className="w-3/4 border-2 rounded-md p-2 border-gray-500 hover:border-gray-800 "
-					selected={endDate}
-					onChange={(date: Date) => setEndDate(date)}
+					selected={new Date(0, 0, 0, endDate.hours, endDate.minutes)}
+					onChange={(date: Date) => {
+						setEndDate({
+							hours: date.getHours(),
+							minutes: date.getMinutes(),
+						});
+						onEndTimeChange({
+							hours: date.getHours(),
+							minutes: date.getMinutes(),
+						});
+					}}
 					showTimeSelect
 					showTimeSelectOnly
 					timeIntervals={15}
 					timeCaption="Time"
 					dateFormat="h:mm aa"
+					filterTime={(time: Date) => {
+						return (
+							time.getHours() > startDate.hours ||
+							(time.getHours() === startDate.hours &&
+								time.getMinutes() > startDate.minutes)
+						);
+					}}
 				/>
 			</div>
 		</div>

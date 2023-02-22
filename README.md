@@ -16,8 +16,10 @@
     -   [x] add toggle component
     -   [x] add time-picker component
     -   [x] integrate components to the global availabilities UI
-    -   [ ] apply checks on dates
+    -   [x] apply checks on dates
 -   [ ] connect to backend API
+    -   [x] set up axios
+    -   [x] implement post request
 -   [ ] create UI to update availabilities
 -   [ ] connect to backend API
 

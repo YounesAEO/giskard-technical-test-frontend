@@ -11,23 +11,27 @@
 
 ### Availability Page
 
--   [ ] create UI to specify availabilities
+-   [x] create UI to specify availabilities
     -   UI inspired from Cal.com
     -   [x] add toggle component
     -   [x] add time-picker component
     -   [x] integrate components to the global availabilities UI
     -   [x] apply checks on dates
--   [ ] connect to backend API
+-   [x] connect to backend API
     -   [x] set up axios
     -   [x] implement post request
 -   [ ] create UI to update availabilities
 -   [ ] connect to backend API
+-   [ ] fix visual bug in availabilities UI
 
 ### Reservation Page
 
--   [ ] implement UI to list available time slots
--   [ ] connect to backend API
--   [ ] implement UI to add a reservation
--   [ ] connect to backend API
+-   [x] implement UI to list available time slots
+-   [x] connect to backend API
+-   [x] implement routing
+-   [x] implement UI to add a reservation
+    -   [x] add UI to choose date of reservation
+    -   [x] add model to fill in the reservation details
+-   [x] connect to backend API
 -   [ ] implement UI to delete a reservation
 -   [ ] connect to backend API

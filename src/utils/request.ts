@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_EP = import.meta.env.BASE_ENDPOINT;
+export const BASE_EP = import.meta.env.VITE_BASE_ENDPOINT;
 const request = axios.create({
 	baseURL: BASE_EP,
 });

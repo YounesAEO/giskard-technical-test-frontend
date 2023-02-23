@@ -35,3 +35,10 @@
 -   [x] connect to backend API
 -   [ ] implement UI to delete a reservation
 -   [ ] connect to backend API
+
+### To Run Locally
+
+1. clone repo: `git clone https://github.com/YounesAEO/giskard-technical-test-frontend.git`
+2. install dependencies: `npm install`
+3. add the follwing env variables in a .env file: `VITE_BASE_ENDPOINT=http://localhost:[API_PORT]/api/`
+4. run project: `npm run dev`

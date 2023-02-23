@@ -160,7 +160,9 @@ export default function AvailabilityTemplate() {
 								isEnabled={times[i].enabled}
 								onToggle={(enabled) => onToggle(enabled, i)}
 							/>
-							<label className="font-bold">{day}</label>
+							<label className="font-bold text-gray-800">
+								{day}
+							</label>
 						</div>
 
 						<TimePicker
@@ -186,7 +188,7 @@ export default function AvailabilityTemplate() {
 						onChange={() => {
 							setIsChecked(!isChecked);
 						}}
-						className="accent-blue-500 w-4 h-4"
+						className="accent-blue-800 w-4 h-4"
 						checked={isChecked}
 					/>
 					<label
@@ -212,7 +214,7 @@ export default function AvailabilityTemplate() {
 
 			<button
 				onClick={saveChanges}
-				className="bg-gray-900 text-white rounded-md p-3 m-3 w-1/3">
+				className="bg-gray-800 text-white rounded-md p-3 m-3 w-1/3">
 				{isSaving ? 'Saving Changes...' : 'Save Changes'}
 			</button>
 		</div>

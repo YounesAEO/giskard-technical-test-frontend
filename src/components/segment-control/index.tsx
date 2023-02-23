@@ -19,7 +19,7 @@ const SegmentedControl = ({
 						'py-1.5 px-4 focus:outline-none border-gray-300 text-xs flex-grow text-center',
 						{
 							'text-gray-500 hover:bg-gray-50': value !== _value,
-							'bg-gray-200': value === _value,
+							'bg-gray-800 text-white': value === _value,
 							'border-r': data?.length - 1 !== i,
 						}
 					)}

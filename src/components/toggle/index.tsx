@@ -14,7 +14,7 @@ export function Toggle({
 				onToggle(e);
 			}}
 			className={`${
-				enabled ? 'bg-gray-900' : 'bg-gray-200'
+				enabled ? 'bg-gray-800' : 'bg-gray-200'
 			} relative inline-flex h-6 w-11 items-center rounded-full`}>
 			<span className="sr-only">Enable notifications</span>
 			<span

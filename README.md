@@ -20,8 +20,8 @@
 -   [x] connect to backend API
     -   [x] set up axios
     -   [x] implement post request
--   [ ] create UI to update availabilities
--   [ ] connect to backend API
+-   [x] create UI to update availabilities
+-   [x] connect to backend API
 -   [ ] fix visual bug in availabilities UI
 
 ### Reservation Page

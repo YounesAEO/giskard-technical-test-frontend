@@ -135,41 +135,41 @@ export default function AvailabilityTemplate() {
 
 		//@ts-ignore
 		if (result.success === true) {
+			setIsSaving(false);
 			alert('Availabilities saved successfully');
 		}
-		setIsSaving(false);
 	};
 
 	return !isLoading ? (
 		<div className="flex flex-col border shadow-sm p-4 items-center">
-			<div className="flex flex-col gap-4 items-center">
+			<div className="flex flex-col gap-4 w-full">
 				{days.map((day, i) => (
-					<div key={i} className="flex items-center">
-						<div className="w-1/3 flex gap-2 ">
+					<div
+						key={i}
+						className="flex gap-8 items-center space-x-8 justify-between">
+						<div className="flex gap-4">
 							<Toggle
 								isEnabled={times[i].enabled}
 								onToggle={(enabled) => onToggle(enabled, i)}
 							/>
-							<label>{day}</label>
+							<label className="font-bold">{day}</label>
 						</div>
 
-						<div className="w-2/3 ">
-							<TimePicker
-								initialEndDate={times[i].end}
-								initialStartDate={times[i].start}
-								onEndTimeChange={(time: any) => {
-									onTimeChange(time, i, false);
-								}}
-								onStartTimeChange={(time: any) => {
-									onTimeChange(time, i, true);
-								}}
-							/>
-						</div>
+						<TimePicker
+							initialEndDate={times[i].end}
+							initialStartDate={times[i].start}
+							onEndTimeChange={(time: any) => {
+								onTimeChange(time, i, false);
+							}}
+							onStartTimeChange={(time: any) => {
+								onTimeChange(time, i, true);
+							}}
+						/>
 					</div>
 				))}
 			</div>
 
-			<div className="flex gap-44 mt-4 mb-4">
+			<div className="flex mt-6 mb-2 justify-between space-x-8">
 				<div className="flex items-center ">
 					<input
 						id="default-checkbox"
@@ -181,7 +181,9 @@ export default function AvailabilityTemplate() {
 						className="accent-blue-500 w-4 h-4"
 						checked={isChecked}
 					/>
-					<label htmlFor="default-checkbox" className="ml-2 ">
+					<label
+						htmlFor="default-checkbox"
+						className="ml-2 font-semibold">
 						Limit Future Bookings
 					</label>
 				</div>

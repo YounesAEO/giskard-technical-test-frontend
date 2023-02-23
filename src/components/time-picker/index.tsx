@@ -2,11 +2,13 @@ import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 
 export const TimePicker = ({
+	initialStartDate = { hours: 9, minutes: 0 },
+	initialEndDate = { hours: 17, minutes: 0 },
 	onStartTimeChange = (time: any) => {},
 	onEndTimeChange = (time: any) => {},
 }) => {
-	const [startDate, setStartDate] = useState({ hours: 9, minutes: 0 });
-	const [endDate, setEndDate] = useState({ hours: 17, minutes: 0 });
+	const [startDate, setStartDate] = useState(initialStartDate);
+	const [endDate, setEndDate] = useState(initialEndDate);
 
 	return (
 		<div className="flex gap-1 items-center">

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Switch } from '@headlessui/react';
 
-export function Toggle({ onToggle = (enabled: boolean) => {} }) {
-	const [enabled, setEnabled] = useState(false);
-
+export function Toggle({
+	isEnabled = false,
+	onToggle = (enabled: boolean) => {},
+}) {
+	const [enabled, setEnabled] = useState(isEnabled);
 	return (
 		<Switch
 			checked={enabled}

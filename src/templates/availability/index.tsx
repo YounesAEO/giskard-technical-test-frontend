@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { TimePicker } from '../../components/time-picker';
 import request from '../../utils/request';
@@ -26,6 +26,53 @@ export default function AvailabilityTemplate() {
 	);
 	const [dateRange, setDateRange] = useState([null, null]);
 	const [isChecked, setIsChecked] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
+	const [isSaving, setIsSaving] = useState(false);
+
+	// add useEffect to fetch data from the backend and set the state
+	useEffect(() => {
+		(async () => {
+			// call the backend to get the available dates
+			const response = await request.get('/availabilities');
+			//@ts-ignore
+			if (response.success) {
+				const { data } = response;
+				data.map((date: any) => {
+					date.days.map((day: number) => {
+						const index = day - 1;
+						setTimes((prev) => {
+							const newTimes = [...prev];
+							newTimes[index] = {
+								...newTimes[index],
+								start: {
+									hours: date.start.hours,
+									minutes: date.start.minutes,
+								},
+								end: {
+									hours: date.end.hours,
+									minutes: date.end.minutes,
+								},
+								enabled: true,
+							};
+							return newTimes;
+						});
+					});
+				});
+
+				const avLimits = data.find(
+					(av: any) => av?.limitStart && av?.limitEnd
+				);
+
+				setDateRange([
+					avLimits?.limitStart && new Date(avLimits.limitStart),
+					avLimits?.limitEnd && new Date(avLimits.limitEnd),
+				]);
+
+				if (avLimits) setIsChecked(true);
+			}
+			setIsLoading(false);
+		})();
+	}, []);
 
 	const onTimeChange = (time: any, day: number, start = true) => {
 		setTimes((prev) => {
@@ -51,6 +98,7 @@ export default function AvailabilityTemplate() {
 	const saveChanges = async (e: any) => {
 		e.preventDefault();
 		// [{start: {hours:9, minutes:0} , end: {hours:17, minutes:0}, days: [1,2,3,4,5,6,7]}]
+		setIsSaving(true);
 		const availabilities = times
 			.filter((time: any) => time.enabled)
 			.reduce((acc, curr) => {
@@ -89,14 +137,17 @@ export default function AvailabilityTemplate() {
 		if (result.success === true) {
 			alert('Availabilities saved successfully');
 		}
+		setIsSaving(false);
 	};
-	return (
+
+	return !isLoading ? (
 		<div className="flex flex-col border shadow-sm p-4 items-center">
 			<div className="flex flex-col gap-4 items-center">
 				{days.map((day, i) => (
 					<div key={i} className="flex items-center">
 						<div className="w-1/3 flex gap-2 ">
 							<Toggle
+								isEnabled={times[i].enabled}
 								onToggle={(enabled) => onToggle(enabled, i)}
 							/>
 							<label>{day}</label>
@@ -104,6 +155,8 @@ export default function AvailabilityTemplate() {
 
 						<div className="w-2/3 ">
 							<TimePicker
+								initialEndDate={times[i].end}
+								initialStartDate={times[i].start}
 								onEndTimeChange={(time: any) => {
 									onTimeChange(time, i, false);
 								}}
@@ -150,8 +203,10 @@ export default function AvailabilityTemplate() {
 			<button
 				onClick={saveChanges}
 				className="bg-gray-900 text-white rounded-md p-3 m-3 w-1/3">
-				Save Changes
+				{isSaving ? 'Saving Changes...' : 'Save Changes'}
 			</button>
 		</div>
+	) : (
+		<div>Loading...</div>
 	);
 }

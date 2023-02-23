@@ -83,8 +83,6 @@ export default function ReservationTemplate() {
 		})();
 	}, []);
 
-	// fix this function
-
 	return (
 		<>
 			<ReservationModal

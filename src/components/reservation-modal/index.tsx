@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { toast } from 'react-toastify';
 import request from '../../utils/request';
 
 export default function ReservationModal({
@@ -37,7 +38,6 @@ export default function ReservationModal({
 			...reservationDetails,
 		};
 		const response = await request.post('/reservations', payload);
-		console.log(response);
 		// @ts-ignore
 		if (response.success) {
 			onConfirm();

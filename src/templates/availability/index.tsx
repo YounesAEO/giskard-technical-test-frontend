@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
+import { toast } from 'react-toastify';
 import { TimePicker } from '../../components/time-picker';
 import request from '../../utils/request';
 import { Toggle } from '../../components/toggle';
@@ -99,6 +100,7 @@ export default function AvailabilityTemplate() {
 		e.preventDefault();
 		// [{start: {hours:9, minutes:0} , end: {hours:17, minutes:0}, days: [1,2,3,4,5,6,7]}]
 		setIsSaving(true);
+
 		const availabilities = times
 			.filter((time: any) => time.enabled)
 			.reduce((acc, curr) => {
@@ -132,11 +134,17 @@ export default function AvailabilityTemplate() {
 				  }
 				: { availabilities }
 		);
-
 		//@ts-ignore
 		if (result.success === true) {
 			setIsSaving(false);
-			alert('Availabilities saved successfully');
+			toast.success('Changes saved successfully', {
+				autoClose: 2000,
+			});
+		} else {
+			setIsSaving(false);
+			toast.error('Something went wrong', {
+				autoClose: 2000,
+			});
 		}
 	};
 

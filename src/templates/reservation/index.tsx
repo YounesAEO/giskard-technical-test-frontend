@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
+import { toast } from 'react-toastify';
 import ReservationModal from '../../components/reservation-modal';
 import AvailableTimes from '../../components/available-times';
 import SegmentedControl from '../../components/segment-control';
@@ -109,6 +110,10 @@ export default function ReservationTemplate() {
 							})
 						);
 					}
+
+					toast.success('Reservation created successfully', {
+						autoClose: 2000,
+					});
 				}}
 			/>
 			<div className="flex w-2/3 bg-white border divide-x shadow-sm">

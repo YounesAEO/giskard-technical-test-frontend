@@ -22,7 +22,7 @@
     -   [x] implement post request
 -   [x] create UI to update availabilities
 -   [x] connect to backend API
--   [ ] fix visual bug in availabilities UI
+-   [x] fix visual bug in availabilities UI
 
 ### Reservation Page
 
